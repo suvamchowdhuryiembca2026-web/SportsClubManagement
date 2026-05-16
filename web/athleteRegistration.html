@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Athlete Registration</title>
+
+<link rel="stylesheet" href="athlete.css">
+<script src="Appjs/athlete.js" defer></script>
+</head>
+
+<body>
+
+<div class="main-container">
+
+<!-- HEADER -->
+<div class="logo">
+<span class="icon">SE</span>
+SportsEcosystem
+</div>
+
+<div class="hdr">Create Account</div>
+<div class="subhdr">Register as a New Player</div>
+
+<!-- STEPPER -->
+<div class="stepper">
+
+    <div class="step active">
+        <div class="circle">1</div>
+        <span>Basic</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        <div class="circle">2</div>
+        <span>Guardian</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        <div class="circle">3</div>
+        <span>Sports</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        <div class="circle">4</div>
+        <span>Docs</span>
+    </div>
+
+</div>
+
+<!-- FORM -->
+<form class="form-card"
+action="AthleteRegisterservlet"
+method="post"
+enctype="multipart/form-data">
+
+
+<div class="form-step active">
+<h2>Personal Details</h2>
+
+<div class="formgrid">
+
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" name="fullName" required>
+</div>
+
+<div class="form-group">
+<label>Date of Birth</label>
+<input type="date" name="dob" required>
+</div>
+
+<div class="form-group">
+<label>Gender</label>
+<select name="gender" required>
+<option value="">Select</option>
+<option value="MALE">Male</option>
+<option value="FEMALE">Female</option>
+<option value="OTHER">Other</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Mobile</label>
+<input type="text" name="mobile" maxlength="10" required>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" name="email" required>
+</div>
+
+<div class="form-group">
+<label>Blood Group</label>
+<input type="text" name="blood" required>
+</div>
+
+</div>
+
+<div class="btn-group">
+<div></div>
+<button type="button" onclick="nextStep()">Next</button>
+</div>
+</div>
+
+<!-- STEP 2 -->
+<div class="form-step">
+
+<h2>Guardian Details</h2>
+
+<div class="formgrid">
+
+<div class="form-group">
+<label>Guardian Name</label>
+<input type="text" name="gname" required>
+</div>
+
+<div class="form-group">
+<label>Relation</label>
+<input type="text" name="relation" required>
+</div>
+
+<div class="form-group">
+<label>Guardian Mobile</label>
+<input type="text" name="gmobile" maxlength="10" required>
+</div>
+
+<div class="form-group">
+<label>Emergency Contact</label>
+<input type="text" name="emergency" required>
+</div>
+
+</div>
+
+<div class="btn-group">
+<button type="button" onclick="prevStep()">Back</button>
+<button type="button" onclick="nextStep()">Next</button>
+</div>
+</div>
+
+<!-- STEP 3 -->
+<div class="form-step">
+
+<h2>Sports Details</h2>
+
+<div class="formgrid">
+
+<div class="form-group">
+<label>State</label>
+<input type="text" name="state" required>
+</div>
+<div class="form-group">
+<label>District</label>
+<input type="text" name="district" required>
+</div>
+<div class="form-group">
+<label>City</label>
+<input type="text" name="city" required>
+</div>
+
+<div class="form-group">
+<label>PIN Code</label>
+<input type="text" name="pincode" required>
+</div>
+<div class="form-group">
+    <label>Full Address</label>
+    <input name="fullAddress"  required >
+</div>
+<div class="form-group">
+<label>Sport</label>
+<select name="sport" required>
+<option value="">Select</option>
+<option value="FOOTBALL">Football</option>
+<option value="CRICKET">Cricket</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Category</label>
+<select name="category" required>
+<option value="">Select</option>
+<option value="U-14">U-14</option>
+<option value="U-17">U-17</option>
+<option value="SENIOR">Senior</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Club</label>
+<input type="text" name="club" required>
+</div>
+<div class="form-group">
+    <label>Training Level</label>
+    <select name="trainingLevel" required>
+        <option value="">Select</option>
+        <option value="BEGINNER">Beginner</option>
+        <option value="INTERMEDIATE">Intermediate</option>
+        <option value="ADVANCED">Advanced</option>
+        <option value="PROFESSIONAL">Professional</option>
+    </select>
+</div>
+
+</div>
+
+<div class="btn-group">
+<button type="button" onclick="prevStep()">Back</button>
+<button type="button" onclick="nextStep()">Next</button>
+</div>
+</div>
+
+<!-- STEP 4 -->
+<div class="form-step">
+
+<h2>Documents</h2>
+
+<div class="formgrid">
+
+<div class="form-group">
+<label>Photo (Max 1MB)</label>
+<input type="file" id="photo" name="photo" accept="image/*" required>
+</div>
+
+<div class="form-group">
+<label>Birth Certificate</label>
+<input type="file" name="birthCert" accept="application/pdf" required>
+</div>
+
+<div class="form-group">
+<label>ID Proof</label>
+<input type="file" name="idProof" accept="application/pdf,image/*" required>
+</div>
+
+</div>
+
+<div class="form-group">
+<label>
+<input type="checkbox" required>
+I agree to Terms and Conditions
+</label>
+</div>
+
+<div class="btn-group">
+<button type="button" onclick="prevStep()">Back</button>
+<button type="submit">Submit</button>
+</div>
+
+</div>
+
+</form>
+
+</div>
+ <div id="successModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="icon">✔</div>
+            <h2>Success</h2>
+            <p>Redirecting...</p>
+        </div>
+    </div>
+
+    <div id="errorModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="icon">✖</div>
+            <h2>Failed</h2>
+            <button onclick="closeModal()">Try Again</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,181 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #01236d, #3861e7);
+    min-height: 100vh;
+}
+
+/* Main Container */
+.formatlogin {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+}
+
+/* Logo */
+.logo {
+    font-weight: bold;
+    font-size: 30px;
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.logo .icon {
+    display: inline-block;
+    color: #2d6cdf;
+    background: white;
+    border-radius: 50%;
+    padding: 8px 12px;
+    font-size: 28px;
+    margin-right: 8px;
+}
+
+/* Header */
+.hdr {
+    font-size: 34px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subhdr {
+    font-size: 18px;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Form Card */
+.formatform {
+    background: white;
+    width: 100%;
+    max-width: 430px;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: 0.3s;
+}
+
+.formatform:hover {
+    transform: translateY(-4px);
+}
+
+.formatform h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #222;
+}
+
+/* Labels */
+.formatform p {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 6px;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2d6cdf;
+    box-shadow: 0 0 8px rgba(45,108,223,0.25);
+}
+
+/* Profile Upload */
+.profile-upload {
+    margin-top: 15px;
+}
+
+.profile-upload label {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.preview-box {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.preview-box img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+/* Small text */
+small {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: gray;
+    text-align: center;
+}
+
+/* Button */
+.cardbtn {
+    width: 100%;
+    background: #2d6cdf;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cardbtn:hover {
+    background: #1d56c4;
+}
+
+/* Bottom Text */
+p,.formatFooter
+{
+    display: block;
+    text-align: left;
+    margin-top: 18px;
+    font-size: 14px;
+}
+.formatFooter
+{
+    text-align: center;
+}
+.link {
+    color: #2d6cdf;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
