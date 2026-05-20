@@ -16,6 +16,10 @@
         <servlet-name>ViewAthleteServlet</servlet-name>
         <servlet-class>controller.ViewAthleteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewPdfServlet</servlet-name>
+        <servlet-class>controller.ViewPdfServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AthleteRegisterservlet</servlet-name>
         <url-pattern>/AthleteRegisterservlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ViewAthleteServlet</servlet-name>
         <url-pattern>/ViewAthleteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPdfServlet</servlet-name>
+        <url-pattern>/ViewPdfServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

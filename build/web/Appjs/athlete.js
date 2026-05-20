@@ -58,23 +58,29 @@ function validateStep() {
 }
 
 /* IMAGE COMPRESSION */
-document.getElementById("photo").addEventListener("change", function (e) {
+document.getElementById("photo").addEventListener("change", function (e)
+{
     const file = e.target.files[0];
+
     if (!file) return;
 
     const reader = new FileReader();
+
     reader.readAsDataURL(file);
 
-    reader.onload = function () {
+    reader.onload = function ()
+    {
         const img = new Image();
+
         img.src = reader.result;
 
-        img.onload = function () {
-
+        img.onload = function ()
+        {
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
 
             const maxWidth = 800;
+
             const scale = maxWidth / img.width;
 
             canvas.width = maxWidth;
@@ -82,16 +88,32 @@ document.getElementById("photo").addEventListener("change", function (e) {
 
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-            canvas.toBlob(blob => {
+            canvas.toBlob(blob =>
+            {
+                const compressed = new File(
+                    [blob],
+                    file.name,
+                    {
+                        type: "image/jpeg",
+                        lastModified: Date.now()
+                    }
+                );
 
-                const compressed = new File([blob], file.name, {
-                    type: "image/jpeg",
-                    lastModified: Date.now()
-                });
+                // MAX 1MB VALIDATION
+                if (compressed.size > 1024 * 1024)
+                {
+                    alert("Image must be below 1MB");
+                    e.target.value = "";
+                    return;
+                }
 
                 const dt = new DataTransfer();
+
                 dt.items.add(compressed);
+
                 e.target.files = dt.files;
+
+                console.log("Compressed Size:", compressed.size / 1024, "KB");
 
             }, "image/jpeg", 0.7);
         };

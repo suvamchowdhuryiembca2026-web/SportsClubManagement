@@ -63,9 +63,21 @@ String createdAt = now.toString();
             String birthPath = uploadFile(birthPart, uploadDir, birthName);
 
    
-            Part idPart = request.getPart("idProof");
-            String idName = athleteId + "_id.pdf";
-            String idPath = uploadFile(idPart, uploadDir, idName);
+           Part idPart = request.getPart("idProof");
+
+            String originalIdName =
+            idPart.getSubmittedFileName();
+
+            String extension =
+            originalIdName.substring(
+            originalIdName.lastIndexOf(".")
+            );
+
+            String idName =
+            athleteId + "_id" + extension;
+
+            String idPath =
+            uploadFile(idPart, uploadDir, idName);
 
             Athlete athlete = new Athlete();
 
