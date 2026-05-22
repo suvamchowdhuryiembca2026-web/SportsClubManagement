@@ -31,10 +31,9 @@ public class ViewAthleteServlet extends HttpServlet
     throws ServletException, IOException
     {
 
-        response.setContentType("text/html");
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
-        PrintWriter out =
-        response.getWriter();
 
         try
         {
@@ -97,6 +96,10 @@ public class ViewAthleteServlet extends HttpServlet
 
             out.println(".logo span{color:#2563eb;}");
 
+            out.println(".btn:active {\n" +
+"    transform: scale(0.95);\n" +
+"}");
+            
             out.println(".top-actions{display:flex;gap:12px;align-items:center;}");
 
             out.println(".wrapper{display:grid;grid-template-columns:330px 1fr;gap:28px;padding:35px;}");
@@ -122,7 +125,37 @@ public class ViewAthleteServlet extends HttpServlet
             out.println(".main-content{display:flex;flex-direction:column;gap:25px;}");
 
             out.println(".card{background:white;border-radius:28px;border:1px solid #e2e8f0;padding:30px;}");
+out.println(".fab-container{position:fixed;bottom:25px;right:25px;z-index:9999;}");
 
+out.println(".fab-main{width:62px;height:62px;border-radius:50%;background:#2563eb;color:white;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,0.25);transition:0.3s;}");
+
+out.println(".fab-container.active .fab-main{transform:rotate(45deg) scale(1.05);background:#1d4ed8;}");
+
+/* STACK */
+out.println(".fab-actions{position:absolute;bottom:80px;right:0;display:flex;flex-direction:column;gap:12px;opacity:0;pointer-events:none;transition:0.3s;}");
+
+out.println(".fab-container.active .fab-actions{opacity:1;pointer-events:auto;}");
+
+/* ITEM */
+out.println(".fab-item{position:relative;background:white;border:1px solid #e2e8f0;padding:10px 14px;border-radius:12px;text-decoration:none;color:#0f172a;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 6px 15px rgba(0,0,0,0.08);transform:translateY(10px);opacity:0;transition:0.3s;}");
+
+/* STAGGER ANIMATION */
+out.println(".fab-container.active .fab-item{transform:translateY(0);opacity:1;}");
+
+out.println(".fab-container.active .fab-item:nth-child(1){transition-delay:0.05s;}");
+out.println(".fab-container.active .fab-item:nth-child(2){transition-delay:0.10s;}");
+out.println(".fab-container.active .fab-item:nth-child(3){transition-delay:0.15s;}");
+out.println(".fab-container.active .fab-item:nth-child(4){transition-delay:0.20s;}");
+out.println(".fab-container.active .fab-item:nth-child(5){transition-delay:0.25s;}");
+
+/* HOVER */
+out.println(".fab-item:hover{background:#f1f5f9;transform:scale(1.05);}");
+
+/* TOOLTIP */
+out.println(".fab-item::after{content:attr(data-tooltip);position:absolute;right:110%;background:#0f172a;color:white;font-size:11px;padding:6px 10px;border-radius:8px;white-space:nowrap;opacity:0;transform:translateX(5px);transition:0.2s;pointer-events:none;}");
+
+out.println(".fab-item:hover::after{opacity:1;transform:translateX(0);} ");
+            
             out.println(".card-title{font-size:21px;font-weight:700;margin-bottom:24px;}");
 
             out.println(".info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}");
@@ -170,6 +203,19 @@ public class ViewAthleteServlet extends HttpServlet
             +
             "}"
             );
+           
+            out.println(
+                "function toggleFAB(){" +
+                " const fab=document.getElementById('fab');" +
+                " fab.classList.toggle('active');" +
+                "}"
+                );
+  out.println(
+"function handleExportClick() {" +
+    "const fab = document.getElementById('fab');" +
+    "fab.classList.toggle('active');" +
+"}"
+);
 
             out.println("</script>");
 
@@ -183,7 +229,7 @@ public class ViewAthleteServlet extends HttpServlet
 
             out.println("<button class='btn'>Approve Athlete</button>");
 
-            out.println("<button class='btn' onclick=\"openExportModal()\">Export</button>");
+            out.println("<button class='btn' onclick=\"handleExportClick()\">Export ⬇</button>");
 
             out.println("</div>");
 
@@ -369,61 +415,27 @@ public class ViewAthleteServlet extends HttpServlet
 
             out.println("</div>");
 
-            // EXPORT MODAL
+           out.println(
+"<div class='fab-container' id='fab'>" +
 
-            out.println
-            (
-            "<div id='exportModal' " +
-            "style='display:none;position:fixed;top:0;left:0;" +
-            "width:100%;height:100%;background:rgba(0,0,0,0.5);" +
-            "justify-content:center;align-items:center;'>"
+    "<div class='fab-actions'>" +
 
-            +
 
-            "<div style='background:white;padding:35px;" +
-            "border-radius:22px;width:350px;'>"
+        "<a class='fab-item' data-tooltip='Download as PDF file' href='ViewPdfServlet?id=" + athleteId + "'>📄 <span>Download PDF</span></a>" +
 
-            +
+        "<a class='fab-item' data-tooltip='Export Excel Sheet' href='ExportExcelServlet?id=" + athleteId + "'>📊 <span>Excel</span></a>" +
 
-            "<h2 style='margin-bottom:25px;'>Export Athlete</h2>"
+        "<a class='fab-item' data-tooltip='Export CSV File' href='ExportCSVServlet?id=" + athleteId + "'>🧾 <span>CSV</span></a>" +
 
-            +
+        "<a class='fab-item' data-tooltip='Go Back to Dashboard' href='AdminDashboardServlet'>⬅ <span>Back</span></a>" +
 
-            "<div style='display:flex;flex-direction:column;gap:15px;'>"
+    "</div>" +
 
-            +
+    "<div class='fab-main' onclick='toggleFAB()'>+</div>" +
 
-            "<a href='ViewPdfServlet?id=" + athleteId + "' target='_blank' class='btn'>View PDF</a>"
-
-            +
-
-            "<a href='DownloadPdfServlet?id=" + athleteId + "' class='btn'>Download PDF</a>"
-
-            +
-
-            "<a href='ExportExcelServlet?id=" + athleteId + "' class='btn'>Export Excel</a>"
-
-            +
-
-            "<a href='ExportCSVServlet?id=" + athleteId + "' class='btn'>Export CSV</a>"
-
-            +
-
-            "<button onclick='closeExportModal()' class='btn'>Close</button>"
-
-            +
-
-            "</div>"
-
-            +
-
-            "</div>"
-
-            +
-
-            "</div>"
-            );
-
+"</div>"
+);
+            
             out.println("</body>");
 
             out.println("</html>");
