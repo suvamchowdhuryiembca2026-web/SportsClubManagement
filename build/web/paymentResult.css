@@ -1,0 +1,76 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.result-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.result-card{
+    width:420px;
+    background:white;
+    padding:40px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
+
+.icon{
+    width:90px;
+    height:90px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:40px;
+    color:white;
+    margin-bottom:20px;
+}
+
+.success .icon{
+    background:#22c55e;
+}
+
+.failed .icon{
+    background:#ef4444;
+}
+
+.result-card h1{
+    margin-bottom:15px;
+    color:#111827;
+}
+
+.result-card p{
+    color:#6b7280;
+    line-height:1.6;
+    margin-bottom:30px;
+}
+
+.result-card a{
+    display:inline-block;
+    padding:14px 30px;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.result-card a:hover{
+    background:#1d4ed8;
+}

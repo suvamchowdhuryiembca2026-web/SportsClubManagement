@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Athlete Admission Payment</title>
+
+    <link rel="stylesheet" href="Payment.css">
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+ 
+</head>
+
+<body>
+
+    <div class="payment-container">
+
+        <div class="payment-card">
+
+            <h1>Sports Club Admission</h1>
+
+            <p class="subtitle">
+                Complete your admission payment to activate registration.
+            </p>
+
+            <div class="amount-box">
+
+                <span>Admission Fee</span>
+
+                <h2>₹ 5000</h2>
+
+            </div>
+
+            <input
+                    type="hidden"
+                    id="athleteId"
+                    value="12345"
+            >
+
+            <button
+                    id="payBtn"
+                    onclick="startPayment()"
+            >
+                Pay Now
+            </button>
+
+        </div>
+
+    </div>
+     <input type="hidden" id="athleteId" value="123456">
+    <script src="admissionPayment.js"></script>
+
+</body>
+</html>

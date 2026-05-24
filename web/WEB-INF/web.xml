@@ -20,6 +20,14 @@
         <servlet-name>ViewPdfServlet</servlet-name>
         <servlet-class>controller.ViewPdfServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateAdmissionOrderServlet</servlet-name>
+        <servlet-class>controller.CreateAdmissionOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyAdmissionPaymentServlet</servlet-name>
+        <servlet-class>controller.VerifyAdmissionPaymentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AthleteRegisterservlet</servlet-name>
         <url-pattern>/AthleteRegisterservlet</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>ViewPdfServlet</servlet-name>
         <url-pattern>/ViewPdfServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateAdmissionOrderServlet</servlet-name>
+        <url-pattern>/CreateAdmissionOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyAdmissionPaymentServlet</servlet-name>
+        <url-pattern>/VerifyAdmissionPaymentServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

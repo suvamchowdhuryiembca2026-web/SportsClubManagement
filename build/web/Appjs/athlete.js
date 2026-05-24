@@ -57,68 +57,79 @@ function validateStep() {
     return valid;
 }
 
-/* IMAGE COMPRESSION */
-document.getElementById("photo").addEventListener("change", function (e)
-{
+document.getElementById("photo").addEventListener("change", function (e) {
     const file = e.target.files[0];
-
     if (!file) return;
 
     const reader = new FileReader();
-
     reader.readAsDataURL(file);
 
-    reader.onload = function ()
-    {
+    reader.onload = function () {
         const img = new Image();
-
         img.src = reader.result;
 
-        img.onload = function ()
-        {
+        img.onload = function () {
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
 
-            const maxWidth = 800;
+            
+            const MAX_WIDTH = 800;
+            const MAX_HEIGHT = 800;
 
-            const scale = maxWidth / img.width;
+            let width = img.width;
+            let height = img.height;
 
-            canvas.width = maxWidth;
-            canvas.height = img.height * scale;
-
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-            canvas.toBlob(blob =>
-            {
-                const compressed = new File(
-                    [blob],
-                    file.name,
-                    {
-                        type: "image/jpeg",
-                        lastModified: Date.now()
-                    }
-                );
-
-                // MAX 1MB VALIDATION
-                if (compressed.size > 1024 * 1024)
-                {
-                    alert("Image must be below 1MB");
-                    e.target.value = "";
-                    return;
+            
+            if (width > height) {
+                if (width > MAX_WIDTH) {
+                    height = Math.round((height * MAX_WIDTH) / width);
+                    width = MAX_WIDTH;
                 }
+            } else {
+                if (height > MAX_HEIGHT) {
+                    width = Math.round((width * MAX_HEIGHT) / height);
+                    height = MAX_HEIGHT;
+                }
+            }
 
-                const dt = new DataTransfer();
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
 
-                dt.items.add(compressed);
-
-                e.target.files = dt.files;
-
-                console.log("Compressed Size:", compressed.size / 1024, "KB");
-
-            }, "image/jpeg", 0.7);
+          
+            compressToLimit(canvas, file.name, e.target, 0.8);
         };
     };
 });
+
+function compressToLimit(canvas, fileName, inputElement, quality) {
+    canvas.toBlob(blob => {
+        if (!blob) { alert("Compression failed."); return; }
+
+        if (blob.size > 1024 * 1024 && quality > 0.2) {
+      
+            compressToLimit(canvas, fileName, inputElement, parseFloat((quality - 0.1).toFixed(1)));
+            return;
+        }
+
+        if (blob.size > 1024 * 1024) {
+            alert("Image is too large even after max compression. Please choose a smaller image.");
+            inputElement.value = "";
+            return;
+        }
+
+        const compressed = new File([blob], fileName, {
+            type: "image/jpeg",
+            lastModified: Date.now()
+        });
+
+        const dt = new DataTransfer();
+        dt.items.add(compressed);
+        inputElement.files = dt.files;
+
+        console.log(`Compressed to: ${(compressed.size / 1024).toFixed(2)} KB at quality ${quality}`);
+    }, "image/jpeg", quality);
+}
 
 showStep(currentStep);
 function showSuccessModal() {

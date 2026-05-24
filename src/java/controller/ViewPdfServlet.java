@@ -1,5 +1,4 @@
 package controller;
-
 import DAO.athleteDAO;
 
 import model.Address;

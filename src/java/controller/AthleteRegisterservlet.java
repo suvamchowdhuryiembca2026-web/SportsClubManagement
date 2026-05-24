@@ -133,9 +133,16 @@ String createdAt = now.toString();
             boolean ok = dao.registerAthlete(athlete, g, a, s, d);
 
            
-            if (ok) {
-                response.sendRedirect("athleteRegistration.html?status=success");
-            } else {
+            if(ok)
+            {
+                response.sendRedirect
+                (
+                    "admissionPayment.html?athleteId="
+                    + athlete.getAthleteId()
+                );
+            }
+            else 
+            {
                 response.sendRedirect("athleteRegistration.html?status=fail");
             }
 

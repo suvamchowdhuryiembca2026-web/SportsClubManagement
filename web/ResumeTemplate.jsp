@@ -217,7 +217,7 @@ body {
 
         </div>
 
-        <!-- CONTACT -->
+        
 
         <div class="section">
 
@@ -239,8 +239,6 @@ body {
             </div>
 
         </div>
-
-        <!-- GUARDIAN -->
 
         <div class="section">
 
@@ -292,7 +290,7 @@ body {
 
                 <p>
 
-                    Dedicated athlete specializing in
+                    Hi I am a dedicated athlete specializing in
                     ${sports.sportType}
                     with strong discipline, teamwork,
                     and competitive spirit.
