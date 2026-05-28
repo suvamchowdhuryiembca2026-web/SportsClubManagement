@@ -1,87 +1,54 @@
 package controller;
 
 import DAO.paymentDAO;
-
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class VerifyAdmissionPaymentServlet
-extends HttpServlet
-{
+public  class VerifyAdmissionPaymentServlet extends HttpServlet {
+
     @Override
-    protected void doPost
-    (
-        HttpServletRequest request,
-        HttpServletResponse response
-    )
-    throws ServletException, IOException
-    {
-        try
-        {
-            long paymentId =
-            Long.parseLong(
-            request.getParameter("paymentId")
-            );
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-            String razorpayPaymentId =
-            request.getParameter("razorpay_payment_id");
+        response.setContentType("text/plain");
+        PrintWriter out = response.getWriter();
 
-            String razorpayOrderId =
-            request.getParameter("razorpay_order_id");
+        try {
 
-            String razorpaySignature =
-            request.getParameter("razorpay_signature");
+            String paymentIdStr = request.getParameter("paymentId");
+            String razorpayPaymentId = request.getParameter("razorpay_payment_id");
 
-            /*
-             * IMPORTANT
-             *
-             * In production:
-             * Verify signature using Razorpay utility
-             *
-             * For now:
-             * We assume payment is successful
-             */
+            if (paymentIdStr == null || razorpayPaymentId == null) {
+                out.print("fail");
+                return;
+            }
 
-            paymentDAO dao =
-            new paymentDAO();
+            long paymentId = Long.parseLong(paymentIdStr);
 
-            boolean updated =
-            dao.updatePaymentStatus
-            (
+            // ✅ STEP 1: UPDATE PAYMENT ONLY
+            paymentDAO pDao = new paymentDAO();
+
+            boolean updated = pDao.updatePaymentStatus(
                 paymentId,
                 "SUCCESS",
                 razorpayPaymentId
             );
 
-            if(updated)
-            {
-                response.sendRedirect
-                (
-                    "paymentSuccess.html"
-                );
+            if (!updated) {
+                out.print("fail");
+                return;
             }
 
-            else
-            {
-                response.sendRedirect
-                (
-                    "paymentFailed.html"
-                );
-            }
-        }
+            // ✅ STEP 2: RETURN SUCCESS IMMEDIATELY
+            out.print("success");
 
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-
-            response.sendRedirect
-            (
-                "paymentFailed.html"
-            );
+            out.print("fail");
         }
     }
 }

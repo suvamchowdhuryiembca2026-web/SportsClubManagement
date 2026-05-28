@@ -1,106 +1,94 @@
-async function startPayment()
-{
-    try
-    {
-        const athleteId =
-        document.getElementById("athleteId").value;
+// READ athleteId FROM URL AND SET INTO HIDDEN INPUT
+const params = new URLSearchParams(window.location.search);
+const athleteIdFromUrl = params.get("athleteId");
 
-        const response =
-        await fetch(
-            "CreateAdmissionOrderServlet",
-            {
-                method:"POST",
+if (!athleteIdFromUrl) {
+    alert("Invalid session. Please register again.");
+} else {
+    document.getElementById("athleteId").value = athleteIdFromUrl;
+}
 
-                headers:
-                {
-                    "Content-Type":
-                    "application/x-www-form-urlencoded"
-                },
+async function startPayment() {
+    const athleteId = document.getElementById("athleteId").value;
 
-                body:
-                "athleteId=" + athleteId
-            }
-        );
+    if (!athleteId) {
+        alert("Athlete ID missing. Please register again.");
+        return;
+    }
 
-        const order =
-        await response.json();
+    try {
+        // STEP 1: CREATE ORDER ON SERVER
+        // Server inserts a PENDING payment row and returns Razorpay order + db_payment_id
+        const response = await fetch("CreateAdmissionOrderServlet", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "athleteId=" + athleteId
+        });
 
-        const options =
-        {
-            key: "YOUR_RAZORPAY_KEY",
+        const order = await response.json();
 
+        // order contains: id, amount, currency, db_payment_id (our DB row id)
+        if (!order.id) {
+            alert("Could not create payment order. Please try again.");
+            return;
+        }
+
+        // STEP 2: OPEN RAZORPAY CHECKOUT
+        const options = {
+            key: "rzp_test_StBIfYA8nax4IQ",
             amount: order.amount,
-
             currency: order.currency,
-
             name: "Sports Club Management",
-
             description: "Admission Fee Payment",
-
             order_id: order.id,
 
-            handler: async function (response)
-            {
-                const verifyResponse =
-                await fetch(
-                    "VerifyAdmissionPaymentServlet",
-                    {
-                        method:"POST",
+            handler: async function (razorpayResponse) {
+                // STEP 3: VERIFY PAYMENT ON SERVER
+                // Send db_payment_id so server knows which DB row to update
+                const verifyResponse = await fetch("VerifyAdmissionPaymentServlet", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body:
+                        "paymentId=" + order.db_payment_id +
+                        "&razorpay_order_id=" + razorpayResponse.razorpay_order_id +
+                        "&razorpay_payment_id=" + razorpayResponse.razorpay_payment_id +
+                        "&razorpay_signature=" + razorpayResponse.razorpay_signature +
+                        "&athleteId=" + athleteId
+                });
 
-                        headers:
-                        {
-                            "Content-Type":
-                            "application/x-www-form-urlencoded"
-                        },
+                const result = await verifyResponse.text();
 
-                        body:
-                        "paymentId=" +
-                        order.receipt.replace("receipt_","") +
-
-                        "&razorpay_order_id=" +
-                        response.razorpay_order_id +
-
-                        "&razorpay_payment_id=" +
-                        response.razorpay_payment_id
-                    }
-                );
-
-                const result =
-                await verifyResponse.text();
-
-                if(result === "success")
-                {
-                    window.location.href =
-                    "paymentSuccess.html";
-                }
-                else
-                {
-                    window.location.href =
-                    "paymentFailed.html";
+                if (result.trim() === "success") {
+                    window.location.href = "paymentSuccess.html";
+                } else {
+                    window.location.href = "paymentFailed.html";
                 }
             },
 
-            theme:
-            {
-                color:"#2563eb"
+            prefill: {
+                name: "",
+                email: "",
+                contact: ""
+            },
+
+            theme: {
+                color: "#2563eb"
+            },
+
+            modal: {
+                ondismiss: function () {alert("Payment cancelled. Your registration is saved. Complete payment to activate your account.");}
             }
         };
 
-        const razorpay =
-        new Razorpay(options);
-
+        const razorpay = new Razorpay(options);
         razorpay.open();
-    }
 
-    catch(error)
-    {
-        console.log(error);
-
-        alert("Payment initialization failed");
+    } catch (error) {
+        console.error(error);
+        alert("Payment initialization failed. Please try again.");
     }
 }
-const params =
-new URLSearchParams(window.location.search);
-
-const athleteId =
-params.get("athleteId");

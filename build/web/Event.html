@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Sports Event</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+
+            min-height:100vh;
+
+            background:
+            linear-gradient(
+            rgba(0,0,0,0.82),
+            rgba(0,0,0,0.85)
+            ),
+
+            url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop');
+
+            background-size:cover;
+            background-position:center;
+            background-attachment:fixed;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            padding:40px 20px;
+
+            overflow-x:hidden;
+        }
+
+        .main-container{
+
+            width:100%;
+            max-width:1000px;
+
+            border-radius:30px;
+
+            overflow:hidden;
+
+            background:
+            rgba(255,255,255,0.08);
+
+            backdrop-filter:blur(18px);
+
+            border:1px solid rgba(255,255,255,0.12);
+
+            box-shadow:
+            0 25px 70px rgba(0,0,0,0.5);
+
+            position:relative;
+        }
+
+        /* ─────────────────────────────
+           TOP BANNER
+        ───────────────────────────── */
+
+        .banner{
+
+            height:320px;
+
+            position:relative;
+
+            overflow:hidden;
+
+            background:
+            linear-gradient(
+            135deg,
+            rgba(1,35,109,0.92),
+            rgba(37,99,235,0.75)
+            ),
+
+            url('https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=2070&auto=format&fit=crop');
+
+            background-size:cover;
+            background-position:center;
+        }
+
+        .banner::before{
+
+            content:'';
+
+            position:absolute;
+
+            width:600px;
+            height:600px;
+
+            background:
+            rgba(255,255,255,0.05);
+
+            border-radius:50%;
+
+            top:-320px;
+            right:-150px;
+        }
+
+        .banner::after{
+
+            content:'';
+
+            position:absolute;
+
+            width:400px;
+            height:400px;
+
+            background:
+            rgba(255,255,255,0.04);
+
+            border-radius:50%;
+
+            bottom:-200px;
+            left:-100px;
+        }
+
+        .banner-content{
+
+            position:relative;
+            z-index:2;
+
+            height:100%;
+
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+
+            padding:45px 60px;
+
+            color:white;
+        }
+
+        .tag{
+
+            width:max-content;
+
+            padding:10px 20px;
+
+            border-radius:40px;
+
+            background:
+            rgba(255,255,255,0.12);
+
+            backdrop-filter:blur(10px);
+
+            border:
+            1px solid rgba(255,255,255,0.12);
+
+            font-size:12px;
+
+            letter-spacing:1.5px;
+
+            margin-bottom:22px;
+        }
+
+        .banner h1{
+
+            font-size:48px;
+
+            line-height:1.1;
+
+            font-weight:800;
+
+            margin-bottom:18px;
+
+            max-width:600px;
+        }
+
+        .banner p{
+
+            max-width:560px;
+
+            color:#e5e7eb;
+
+            line-height:1.8;
+
+            font-size:15px;
+        }
+
+        /* ─────────────────────────────
+           FLOATING SPORTS ICONS
+        ───────────────────────────── */
+
+        .sports-icons{
+
+            position:absolute;
+
+            bottom:25px;
+            right:40px;
+
+            display:flex;
+
+            gap:18px;
+
+            z-index:3;
+        }
+
+        .icon-box{
+
+            width:58px;
+            height:58px;
+
+            border-radius:18px;
+
+            background:
+            rgba(255,255,255,0.14);
+
+            backdrop-filter:blur(10px);
+
+            border:
+            1px solid rgba(255,255,255,0.18);
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            transition:0.3s;
+        }
+
+        .icon-box:hover{
+
+            transform:
+            translateY(-5px)
+            scale(1.05);
+
+            background:
+            rgba(255,255,255,0.22);
+        }
+
+        .icon-box svg{
+
+            width:28px;
+            height:28px;
+
+            fill:#ffffff;
+        }
+
+        /* ─────────────────────────────
+           FORM SECTION
+        ───────────────────────────── */
+
+        .form-section{
+
+            padding:45px;
+        }
+
+        .section-title{
+
+            color:white;
+
+            font-size:24px;
+
+            font-weight:700;
+
+            margin-bottom:30px;
+        }
+
+        .form-grid{
+
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:22px;
+        }
+
+        .form-group{
+
+            display:flex;
+            flex-direction:column;
+        }
+
+        .full-width{
+
+            grid-column:1 / 3;
+        }
+
+        label{
+
+            margin-bottom:10px;
+
+            color:#f3f4f6;
+
+            font-size:14px;
+
+            font-weight:500;
+        }
+
+        input,
+        textarea,
+        select{
+
+            width:100%;
+
+            padding:16px 18px;
+
+            border:none;
+
+            border-radius:18px;
+
+            background:
+            rgba(255,255,255,0.10);
+
+            backdrop-filter:blur(12px);
+
+            color:white;
+
+            font-size:14px;
+
+            outline:none;
+
+            transition:0.3s;
+
+            border:
+            1px solid transparent;
+        }
+
+        input::placeholder,
+        textarea::placeholder{
+
+            color:#d1d5db;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus{
+
+            transform:translateY(-2px);
+
+            background:
+            rgba(255,255,255,0.16);
+
+            border:
+            1px solid rgba(255,255,255,0.22);
+
+            box-shadow:
+            0 10px 24px rgba(0,0,0,0.25);
+        }
+
+        select option{
+
+            color:black;
+        }
+
+        textarea{
+
+            resize:none;
+
+            height:140px;
+        }
+
+        /* ─────────────────────────────
+           BUTTON
+        ───────────────────────────── */
+
+        .btn{
+
+            width:100%;
+
+            margin-top:35px;
+
+            padding:18px;
+
+            border:none;
+
+            border-radius:18px;
+
+            background:
+            linear-gradient(
+            to right,
+            #22c55e,
+            #16a34a
+            );
+
+            color:white;
+
+            font-size:17px;
+
+            font-weight:700;
+
+            cursor:pointer;
+
+            transition:0.35s;
+
+            letter-spacing:1px;
+        }
+
+        .btn:hover{
+
+            transform:
+            translateY(-3px);
+
+            box-shadow:
+            0 15px 28px rgba(34,197,94,0.35);
+        }
+
+        /* ─────────────────────────────
+           RESPONSIVE
+        ───────────────────────────── */
+
+        @media(max-width:850px){
+
+            .banner{
+
+                height:auto;
+            }
+
+            .banner-content{
+
+                padding:35px 25px 90px;
+            }
+
+            .banner h1{
+
+                font-size:34px;
+            }
+
+            .form-section{
+
+                padding:25px;
+            }
+
+            .form-grid{
+
+                grid-template-columns:1fr;
+            }
+
+            .full-width{
+
+                grid-column:auto;
+            }
+
+            .sports-icons{
+
+                right:20px;
+                bottom:18px;
+            }
+
+            .icon-box{
+
+                width:50px;
+                height:50px;
+            }
+
+            .icon-box svg{
+
+                width:24px;
+                height:24px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <!-- ─────────────────────────────
+         HERO BANNER
+    ───────────────────────────── -->
+
+    <div class="banner">
+
+        <div class="banner-content">
+
+            <div class="tag">
+                SPORTS ECOSYSTEM • EVENT MANAGEMENT
+            </div>
+
+            <h1>
+                Create Stunning Sports Events
+            </h1>
+
+            <p>
+                Organize tournaments, leagues, championships,
+                coaching camps and competitive events with a
+                modern premium sports management experience.
+            </p>
+
+        </div>
+
+        <!-- SPORTS ICONS -->
+
+       <!-- ─────────────────────────────
+     COLORFUL SPORTS ICONS
+───────────────────────────── -->
+
+<div class="sports-icons">
+
+    <!-- Football -->
+    <div class="icon football">
+
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 9l3 12h14l3-12-10-7z"/>
+        </svg>
+
+    </div>
+
+    <!-- Trophy -->
+    <div class="icon trophy">
+
+        <svg viewBox="0 0 24 24">
+            <path d="M18 2H6v3H3v3c0 3.31 2.69 6 6 6 .72 1.45 1.96 2.56 3.5 3V20H8v2h8v-2h-4.5v-3c1.54-.44 2.78-1.55 3.5-3 3.31 0 6-2.69 6-6V5h-3V2z"/>
+        </svg>
+
+    </div>
+
+    <!-- Basketball -->
+    <div class="icon basketball">
+
+        <svg viewBox="0 0 24 24">
+            <path d="M17.09 3.56A9 9 0 0 0 12 2v20a9 9 0 0 0 5.09-18.44zM12 2a9 9 0 0 0-5.09 18.44A9 9 0 0 0 12 22z"/>
+        </svg>
+
+    </div>
+
+    <!-- Cricket -->
+    <div class="icon cricket">
+
+        <svg viewBox="0 0 24 24">
+            <path d="M21 3l-9 9 3 3 9-9-3-3zM2 22l6-2-4-4-2 6z"/>
+        </svg>
+
+    </div>
+
+</div>
+
+    </div>
+
+    <!-- ─────────────────────────────
+         FORM SECTION
+    ───────────────────────────── -->
+
+    <div class="form-section">
+
+        <div class="section-title">
+            Event Details
+        </div>
+
+        <form action="CreateEventServlet"
+              method="post">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Event Name</label>
+
+                    <input type="text"
+                           name="eventName"
+                           placeholder="Inter Club Football Championship"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Sport Type</label>
+
+                    <select name="sportType"
+                            required>
+
+                        <option value="">
+                            Select Sport
+                        </option>
+
+                        <option>Cricket</option>
+                        <option>Football</option>
+                        <option>Basketball</option>
+                        <option>Badminton</option>
+                        <option>Tennis</option>
+                        <option>Swimming</option>
+                        <option>Volleyball</option>
+                        <option>Athletics</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Event Date</label>
+
+                    <input type="date"
+                           name="eventDate"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Registration Last Date</label>
+
+                    <input type="date"
+                           name="lastDate"
+                           required>
+
+                </div>
+
+                <div class="form-group full-width">
+
+                    <label>Venue / Location</label>
+
+                    <input type="text"
+                           name="location"
+                           placeholder="Salt Lake Stadium, Kolkata"
+                           required>
+
+                </div>
+
+                <div class="form-group full-width">
+
+                    <label>Description</label>
+
+                    <textarea
+                        name="description"
+                        placeholder="Describe event rules, rewards, eligibility, facilities and tournament details..."
+                        required></textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Registration Fee (₹)</label>
+
+                    <input type="number"
+                           name="registrationFee"
+                           placeholder="500"
+                           required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Event Banner URL</label>
+
+                    <input type="text"
+                           name="eventBanner"
+                           placeholder="Paste event banner image URL"
+                           required>
+
+                </div>
+
+            </div>
+
+            <button type="submit"
+                    class="btn">
+
+                CREATE EVENT
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

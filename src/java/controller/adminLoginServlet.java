@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class adminLoginServlet extends HttpServlet
 {
@@ -37,18 +38,24 @@ public class adminLoginServlet extends HttpServlet
                 dao.checkLogin(username, password);
 
         if(valid)
-        {
-            response.sendRedirect("AdminDashboardServlet");
-           
-        }
+{
+    HttpSession oldSession = request.getSession(false);
+if (oldSession != null) {
+    oldSession.invalidate();
+}
+HttpSession session = request.getSession(true);
+
+session.setAttribute("role", "ADMIN");
+
+    response.sendRedirect("AdminDashboardServlet");
+}
 
         else
-            out.println("<h2 style color:red>Admin Not Found");
-//        {
-//            response.sendRedirect
-//            (
-//                "adminLogin.html?status=invalid"
-//            );
-//        }
-    }
+            
+            response.sendRedirect
+            (
+                "adminLogin.html?status=invalid"
+            );
+        }
+    
 }

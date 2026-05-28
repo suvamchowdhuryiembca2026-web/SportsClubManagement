@@ -241,4 +241,42 @@ public class paymentDAO
 
         return list;
     }
+    // CHECK EVENT PAYMENT
+
+public boolean hasPaidForEvent(long athleteId, long eventId)
+{
+    boolean paid = false;
+
+    try
+    {
+        con = DbConnection.getConnection();
+
+        String sql =
+        "SELECT * FROM PAYMENT " +
+        "WHERE ATHLETE_ID=? " +
+        "AND PAYMENT_TYPE=? " +
+        "AND PAYMENT_STATUS='SUCCESS'";
+
+        PreparedStatement ps =
+        con.prepareStatement(sql);
+
+        ps.setLong(1, athleteId);
+
+        ps.setString(2, "EVENT_" + eventId);
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next())
+        {
+            paid = true;
+        }
+    }
+
+    catch(Exception e)
+    {
+        e.printStackTrace();
+    }
+
+    return paid;
+}
 }

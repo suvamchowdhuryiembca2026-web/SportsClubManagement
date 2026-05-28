@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Event Registration Payment</title>
+    <link rel="stylesheet" href="Payment.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-card">
+            <h1 id="eventTitle">Event Registration</h1>
+            <p class="subtitle">
+                Complete your payment to register for this event.
+            </p>
+            <div class="amount-box">
+                <span>Registration Fee</span>
+                <h2 id="displayAmount">&#8377;...</h2>
+            </div>
+            <input type="hidden" id="athleteId" value="">
+            <input type="hidden" id="eventId" value="">
+            <input type="hidden" id="amount" value="">
+            <button id="payBtn" onclick="startPayment()">
+                Pay Now
+            </button>
+        </div>
+    </div>
+    <script src="Appjs/eventPayment.js"></script>
+</body>
+</html>

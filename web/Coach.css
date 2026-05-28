@@ -1,0 +1,249 @@
+/* =============================================
+   coach.css — matches athlete.css exactly
+   ============================================= */
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(to right, #01236d, #3861e7);
+}
+
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    gap: 12px;
+}
+
+/* HEADER */
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    background: white;
+    color: #2d6cdf;
+    border-radius: 50%;
+    padding: 6px 10px;
+}
+
+.hdr {
+    font-size: 34px;
+    color: white;
+    font-weight: bold;
+}
+
+.subhdr {
+    color: white;
+    font-size: 16px;
+}
+
+/* STEPPER */
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0 20px;
+}
+
+.step {
+    text-align: center;
+    opacity: 0.4;
+    min-width: 70px;
+}
+
+.step.active,
+.step.completed {
+    opacity: 1;
+}
+
+.circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-weight: bold;
+}
+
+.step.active .circle {
+    background: #2563eb;
+    color: white;
+}
+
+.step.completed .circle {
+    background: #22c55e;
+    color: white;
+}
+
+.line {
+    width: 50px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* FORM CARD */
+.form-card {
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    border-radius: 18px;
+    padding: 35px;
+}
+
+/* STEPS */
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+/* GRID */
+.formgrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #334155;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background: #fafafa;
+    font-size: 14px;
+    font-family: Arial;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #f0f5ff;
+}
+
+/* BUTTONS */
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+button {
+    padding: 12px 18px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* SPAN (stepper labels) */
+span {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* MODALS */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: white;
+    padding: 30px 25px;
+    border-radius: 14px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-box h2 {
+    color: #1e293b;
+    margin: 10px 0 6px;
+}
+
+.modal-box p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.modal-icon {
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+.success-icon {
+    color: #22c55e;
+}
+
+.error-icon {
+    color: #ef4444;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .formgrid {
+        grid-template-columns: 1fr;
+    }
+
+    .stepper {
+        flex-wrap: wrap;
+    }
+
+    .form-group[style*="grid-column"] {
+        grid-column: span 1 !important;
+    }
+}

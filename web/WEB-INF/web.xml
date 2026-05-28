@@ -28,6 +28,54 @@
         <servlet-name>VerifyAdmissionPaymentServlet</servlet-name>
         <servlet-class>controller.VerifyAdmissionPaymentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExportExcelServlet</servlet-name>
+        <servlet-class>controller.ExportExcelServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AthleteDashboardServlet</servlet-name>
+        <servlet-class>controller.AthleteDashboardServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserLoginServlet</servlet-name>
+        <servlet-class>controller.UserLoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AthleteApproveServlet</servlet-name>
+        <servlet-class>controller.AthleteApproveServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AthleteRejectServlet</servlet-name>
+        <servlet-class>controller.AthleteRejectServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CoachRegisterServlet</servlet-name>
+        <servlet-class>controller.CoachRegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CoachApproveServlet</servlet-name>
+        <servlet-class>controller.CoachApproveServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CoachRejectServlet</servlet-name>
+        <servlet-class>controller.CoachRejectServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCoachServlet</servlet-name>
+        <servlet-class>controller.ViewCoachServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateEventServlet</servlet-name>
+        <servlet-class>controller.CreateEventServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EventPaymentServlet</servlet-name>
+        <servlet-class>controller.EventPaymentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EventPaymentVerifyServlet</servlet-name>
+        <servlet-class>controller.EventPaymentVerifyServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AthleteRegisterservlet</servlet-name>
         <url-pattern>/AthleteRegisterservlet</url-pattern>
@@ -55,6 +103,54 @@
     <servlet-mapping>
         <servlet-name>VerifyAdmissionPaymentServlet</servlet-name>
         <url-pattern>/VerifyAdmissionPaymentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportExcelServlet</servlet-name>
+        <url-pattern>/ExportExcelServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AthleteDashboardServlet</servlet-name>
+        <url-pattern>/AthleteDashboardServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserLoginServlet</servlet-name>
+        <url-pattern>/UserLoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AthleteApproveServlet</servlet-name>
+        <url-pattern>/AthleteApproveServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AthleteRejectServlet</servlet-name>
+        <url-pattern>/AthleteRejectServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CoachRegisterServlet</servlet-name>
+        <url-pattern>/CoachRegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CoachApproveServlet</servlet-name>
+        <url-pattern>/CoachApproveServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CoachRejectServlet</servlet-name>
+        <url-pattern>/CoachRejectServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCoachServlet</servlet-name>
+        <url-pattern>/ViewCoachServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateEventServlet</servlet-name>
+        <url-pattern>/CreateEventServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventPaymentServlet</servlet-name>
+        <url-pattern>/EventPaymentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventPaymentVerifyServlet</servlet-name>
+        <url-pattern>/EventPaymentVerifyServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

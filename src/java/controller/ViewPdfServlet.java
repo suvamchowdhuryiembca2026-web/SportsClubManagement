@@ -94,7 +94,7 @@ public class ViewPdfServlet extends HttpServlet
             docs
             );
 
-            // FORWARD TO RESUME JSP
+            
 
             request.getRequestDispatcher
             (

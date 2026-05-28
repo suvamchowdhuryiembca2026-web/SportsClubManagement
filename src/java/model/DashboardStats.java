@@ -2,10 +2,21 @@ package model;
 
 public class DashboardStats
 {
+    // ATHLETE
     private int totalAthletes;
-    private int pending;
-    private int approved;
-    private int totalSports;
+    private int pendingAthletes;
+    private int approvedAthletes;
+    private int rejectedAthletes;
+
+    // COACH
+    private int totalCoaches;
+    private int pendingCoaches;
+    private int approvedCoaches;
+    private int rejectedCoaches;
+
+    // ─────────────────────────
+    // ATHLETE GETTERS
+    // ─────────────────────────
 
     public int getTotalAthletes() {
         return totalAthletes;
@@ -15,27 +26,63 @@ public class DashboardStats
         this.totalAthletes = totalAthletes;
     }
 
-    public int getPending() {
-        return pending;
+    public int getPendingAthletes() {
+        return pendingAthletes;
     }
 
-    public void setPending(int pending) {
-        this.pending = pending;
+    public void setPendingAthletes(int pendingAthletes) {
+        this.pendingAthletes = pendingAthletes;
     }
 
-    public int getApproved() {
-        return approved;
+    public int getApprovedAthletes() {
+        return approvedAthletes;
     }
 
-    public void setApproved(int approved) {
-        this.approved = approved;
+    public void setApprovedAthletes(int approvedAthletes) {
+        this.approvedAthletes = approvedAthletes;
     }
 
-    public int getTotalSports() {
-        return totalSports;
+    public int getRejectedAthletes() {
+        return rejectedAthletes;
     }
 
-    public void setTotalSports(int totalSports) {
-        this.totalSports = totalSports;
+    public void setRejectedAthletes(int rejectedAthletes) {
+        this.rejectedAthletes = rejectedAthletes;
+    }
+
+    // ─────────────────────────
+    // COACH GETTERS
+    // ─────────────────────────
+
+    public int getTotalCoaches() {
+        return totalCoaches;
+    }
+
+    public void setTotalCoaches(int totalCoaches) {
+        this.totalCoaches = totalCoaches;
+    }
+
+    public int getPendingCoaches() {
+        return pendingCoaches;
+    }
+
+    public void setPendingCoaches(int pendingCoaches) {
+        this.pendingCoaches = pendingCoaches;
+    }
+
+    public int getApprovedCoaches() {
+        return approvedCoaches;
+    }
+
+    public void setApprovedCoaches(int approvedCoaches) {
+        this.approvedCoaches = approvedCoaches;
+    }
+
+    public int getRejectedCoaches() {
+        return rejectedCoaches;
+    }
+
+    public void setRejectedCoaches(int rejectedCoaches) {
+        this.rejectedCoaches = rejectedCoaches;
     }
 }
